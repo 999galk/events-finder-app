@@ -5,7 +5,12 @@ import 'react-big-calendar/lib/sass/styles.scss';
 import '../Calendar.css';
 import EventDetails from '../Events/EventDetails';
  
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
+const fetch_retry = (url , n) => fetch(url).catch(function(error) {
+	console.log('attempt ', n);
+    if (n === 1) throw error;
+    return fetch_retry(url , n - 1);
+});
  
 class EventsCalendar extends React.Component{
 	constructor(props){
@@ -49,9 +54,10 @@ class EventsCalendar extends React.Component{
 
 	getEvents= () => {
 		const fetchUrl = 'https://fierce-bastion-22088.herokuapp.com/calendar/' + this.props.countryCode + '/' + this.props.city;
-		fetch(fetchUrl)
+		fetch_retry(fetchUrl, 3)
 		.then(res => res.json())
 		.then(data => {
+			let retry = 0;
 			let tempEventsArr = [];
 			if(data[Object.keys(data)[0]].events){
 				const eventsArr = data[Object.keys(data)[0]].events;
@@ -68,7 +74,7 @@ class EventsCalendar extends React.Component{
 					}
 					return obj;
 				})
-			}
+			} else 
 			
 			this.setState({events : tempEventsArr}, this.addClickFunctions);
 		});
