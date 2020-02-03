@@ -44,6 +44,12 @@ class SignIn extends React.Component {
         }
       })
   }
+
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.onSubmitSignIn();
+    }
+  }
  
   onGoogleClick = () => {
     fetch('https://fierce-bastion-22088.herokuapp.com/googleAuth/login')
@@ -87,7 +93,7 @@ class SignIn extends React.Component {
                   id="password"
                   required
                   onChange={this.onPasswordChange}
-                  onKeyPress={this.onSubmitSignIn}
+                  onKeyPress={this.handleKeyPress}
                 />
               </div>
             </fieldset>

@@ -49,6 +49,12 @@ class Register extends React.Component {
         })
   }
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.onSubmitSignIn();
+    }
+  }
+
   onGoogleRegister =() =>{
     fetch('https://fierce-bastion-22088.herokuapp.com/googleAuth/register')
     .then(res => res.json())
@@ -97,6 +103,7 @@ class Register extends React.Component {
                   name="password"
                   id="password"
                   onChange={this.onPasswordChange}
+                  onKeyPress={this.handleKeyPress}
                 />
               </div>
             </fieldset>
@@ -106,7 +113,6 @@ class Register extends React.Component {
                 type="submit"
                 value="Sign Up"
                 onClick={this.onSubmitRegister}
-                onKeyPress={this.onSubmitRegister}
               />
               <div className="pa3">
             <p className="b ma0">OR</p>
