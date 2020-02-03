@@ -52,7 +52,7 @@ class EventsCalendar extends React.Component{
 		fetch(url).catch(function(error) {
 			console.log('attempt ', n);
 		    if (n === 1) throw error;
-		    return fetch_retry(url , n - 1);
+		    return this.fetch_retry(url , n - 1);
 		});
 	}
 
