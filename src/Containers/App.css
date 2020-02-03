@@ -1,0 +1,22 @@
+html,body{
+  height: 100%;
+}
+.App {
+  text-align: center;
+  position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+footer{
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,36 @@
+.rbc-event-content{
+  position: relative;
+}
+.singleEvent{
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  z-index:99;
+  top:0
+}
+.hidden {
+  display: none !important;
+}
+.back {
+  z-index: -1;
+}
+#details {
+ color:white;
+ background-color: black;
+}
+.eventDetails{
+  background-color: black;
+}
+.rbc-calendar{
+  padding:15px;
+  margin-left:7%;
+  margin-right:7%;
+  border : solid #3174ad;
+  border-radius: 1.5rem;
+}
+#calendar{
+  background-color: #F1F2F7;
+}
