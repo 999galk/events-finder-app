@@ -106,6 +106,7 @@ class Register extends React.Component {
                 type="submit"
                 value="Sign Up"
                 onClick={this.onSubmitRegister}
+                onKeyPress={this.onSubmitRegister}
               />
               <div className="pa3">
             <p className="b ma0">OR</p>
