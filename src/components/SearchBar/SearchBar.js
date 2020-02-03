@@ -65,6 +65,7 @@ class SearchBar extends React.Component {
 	}
 
 	onCityChange = () => {
+		console.log('detected city change');
 		const select = document.getElementById('citySelector');
 		const val = select.value;
 		if(this.state.calChanged){

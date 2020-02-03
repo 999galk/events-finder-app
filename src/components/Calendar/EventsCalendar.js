@@ -6,11 +6,6 @@ import '../Calendar.css';
 import EventDetails from '../Events/EventDetails';
  
 const localizer = momentLocalizer(moment);
-const fetch_retry = (url , n) => fetch(url).catch(function(error) {
-	console.log('attempt ', n);
-    if (n === 1) throw error;
-    return fetch_retry(url , n - 1);
-});
  
 class EventsCalendar extends React.Component{
 	constructor(props){
@@ -52,9 +47,19 @@ class EventsCalendar extends React.Component{
 	      })
 	}
 
+	fetch_retry = (url , n) => {
+		console.log('got to fetch retry');
+		fetch(url).catch(function(error) {
+			console.log('attempt ', n);
+		    if (n === 1) throw error;
+		    return fetch_retry(url , n - 1);
+		});
+	}
+
 	getEvents= () => {
+		console.log('got to get events');
 		const fetchUrl = 'https://fierce-bastion-22088.herokuapp.com/calendar/' + this.props.countryCode + '/' + this.props.city;
-		fetch_retry(fetchUrl, 3)
+		this.fetch_retry(fetchUrl, 3)
 		.then(res => res.json())
 		.then(data => {
 			let retry = 0;
