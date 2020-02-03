@@ -30,7 +30,7 @@ class SignIn extends React.Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          const profileUrl = '/profile/' + user.id;
+          const profileUrl = '/?profile=' + user.id;
           window.location.pathname = profileUrl;
         } else { 
           const passDiv = document.getElementById('password');

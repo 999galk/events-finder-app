@@ -31,13 +31,13 @@ class Register extends React.Component {
         email: this.state.email,
         password: this.state.password,
         name: this.state.name
-      })
+      }) 
     })
       .then(response => response.json())
       .then(user => {
         console.log(user.id);
           if (user.id) {
-            const profileUrl = '/profile/' + user.id;
+            const profileUrl = '/?profile=' + user.id;
             window.location.pathname = profileUrl;
           } else {
             const passDiv = document.getElementById('password');
