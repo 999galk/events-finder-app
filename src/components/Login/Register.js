@@ -37,8 +37,8 @@ class Register extends React.Component {
       .then(user => {
         console.log(user.id);
           if (user.id) {
-            const profileUrl = '/?profile=' + user.id;
-            window.location.pathname = profileUrl;
+            const profileUrl = 'https://dreamy-bell-bb05ae.netlify.com/?profile=' + user.id;
+            window.location.replace(profileUrl);
           } else {
             const passDiv = document.getElementById('password');
             const error = document.createElement('p');

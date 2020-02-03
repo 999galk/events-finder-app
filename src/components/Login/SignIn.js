@@ -30,8 +30,8 @@ class SignIn extends React.Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          const profileUrl = '/?profile=' + user.id;
-          window.location.pathname = profileUrl;
+          const profileUrl = 'https://dreamy-bell-bb05ae.netlify.com/?profile=' + user.id;
+          window.location.replace(profileUrl);
         } else { 
           const passDiv = document.getElementById('password');
           if(!document.getElementById('errorMsg')){
