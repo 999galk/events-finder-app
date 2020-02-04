@@ -50,6 +50,7 @@ class App extends React.Component{
       this.setState({isSignedIn : true, userId : id}, this.setState({route: '/home'}));
     }
     window.onpopstate = this.onBackButtonEvent;
+    fetch('https://fierce-bastion-22088.herokuapp.com/calendar/US');
   }
 
   render () {
