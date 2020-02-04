@@ -47,22 +47,22 @@ class EventsCalendar extends React.Component{
 	      })
 	}
 
-	fetch_retry = (url , n) => {
-		console.log('got to fetch retry');
-		fetch(url).catch(function(error) {
-			console.log('attempt ', n);
-		    if (n === 1) throw error;
-		    return this.fetch_retry(url , n - 1);
-		});
-	}
+	// fetch_retry = (url , n) => {
+	// 	console.log('got to fetch retry', url);
+	// 	fetch(url).catch(function(error) {
+	// 		console.log('attempt ', n);
+	// 	    if (n === 1) throw error;
+	// 	    return this.fetch_retry(url , n - 1);
+	// 	});
+	// }
 
 	getEvents= () => {
 		console.log('got to get events');
 		const fetchUrl = 'https://fierce-bastion-22088.herokuapp.com/calendar/' + this.props.countryCode + '/' + this.props.city;
-		this.fetch_retry(fetchUrl, 3)
+		//this.fetch_retry(fetchUrl, 3)
+		fetch(fetchUrl)
 		.then(res => res.json())
 		.then(data => {
-			let retry = 0;
 			let tempEventsArr = [];
 			if(data[Object.keys(data)[0]].events){
 				const eventsArr = data[Object.keys(data)[0]].events;
@@ -79,7 +79,7 @@ class EventsCalendar extends React.Component{
 					}
 					return obj;
 				})
-			} else 
+			}
 			
 			this.setState({events : tempEventsArr}, this.addClickFunctions);
 		});
