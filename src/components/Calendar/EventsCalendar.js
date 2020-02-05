@@ -15,6 +15,7 @@ class EventsCalendar extends React.Component{
 			eventTitle : 'Powered By',
 			eventImg : 'https://uk.tmconst.com/ccp-salesforce-images/DK/ticketmaster_guider_720x405.jpg',
 			eventLink : 'https://www.ticketmaster.com/',
+			eventTicketsLimit : '',
 			eventId : '',
 			eventClicked : false
 		}}
@@ -130,7 +131,7 @@ class EventsCalendar extends React.Component{
   	}
 
 	render(){
-		const {events, eventImg, eventLink, eventTitle, eventClicked} = this.state;
+		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit} = this.state;
 		const {isSignedIn} = this.props;
 		return(
 			<div id='calendar' className='pa2 ma2 shadow-5'>
@@ -145,7 +146,7 @@ class EventsCalendar extends React.Component{
 			      style={{height: 500}}
 			    />
 			    <div style={{display:'flex', justifyContent:'center'}}>
-		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} onRouteChange={this.props.onRouteChange}/>
+		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} onRouteChange={this.props.onRouteChange} limit={eventTicketsLimit}/>
 		  		</div>
 			</div> 
 		);

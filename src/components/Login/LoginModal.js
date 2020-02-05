@@ -1,5 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
+import {onGoogleClick} from './LoginFunctions';
+import googleSignin from './googleSignin.png';
 
 Modal.setAppElement(document.getElementById('App'));
 
@@ -34,10 +36,9 @@ class LoginModal extends React.Component {
   }
 
   componentWillMount() {
-  		var that = this;
-        setTimeout(function() {
-            that.setState({ showModal: true });
-        }, that.props.wait);
+  		if(this.props.openModal){
+  			this.setState({ showModal: true });
+  		}
    }
   
   render () {
@@ -48,11 +49,11 @@ class LoginModal extends React.Component {
            contentLabel="Minimal Modal Example"
            style={customStyles}
         >
-          <div style={{width:'400px'}}>
-          bla bla
+          <div className='pa4' style={{width:'400px', display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
+	          <h2>Sign In with google to unlock this option</h2>
+	          <img alt='googlesignin' src={googleSignin} style={{width:'200px', marginLeft:'auto', marginRight:'auto'}} onClick={() => {onGoogleClick('login')}} className="grow pointer mt3"/>
+	          <div className='pointer b grow mt3' onClick={this.handleCloseModal}>Sign in later</div>
           </div>
-          <div className='pointer' onClick={this.handleCloseModal}>Sign in later</div>
-
         </Modal>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import googleSignin from './googleSignin.png';
+import {onGoogleClick} from './LoginFunctions';
 
 class Register extends React.Component {
   constructor(props) {
@@ -55,14 +56,14 @@ class Register extends React.Component {
     }
   }
 
-  onGoogleRegister =() =>{
-    fetch('https://fierce-bastion-22088.herokuapp.com/googleAuth/register')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.url);
-      window.location.replace(data.url);
-    });
-  } 
+  // onGoogleRegister =() =>{
+  //   fetch('https://fierce-bastion-22088.herokuapp.com/googleAuth/register')
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data.url);
+  //     window.location.replace(data.url);
+  //   });
+  // } 
 
   componentDidMount(){
     window.onpopstate = this.props.onBackButtonEvent; 
@@ -117,7 +118,7 @@ class Register extends React.Component {
               />
               <div className="pa3">
             <p className="b ma0">OR</p>
-              <img alt='googlesignin' src={googleSignin} style={{width:'50%'}} onClick={this.onGoogleClick} className="grow pointer mt3"/>
+              <img alt='googlesignin' src={googleSignin} style={{width:'50%'}} onClick={() => {onGoogleClick('register')}} className="grow pointer mt3"/>
             </div>
             </div>
           </div>
