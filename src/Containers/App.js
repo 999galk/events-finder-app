@@ -5,7 +5,8 @@ import Header from '../components/Header/Header';
 import Nav from '../components/NavBar/Nav';
 import EventsCalendar from '../components/Calendar/EventsCalendar';
 import Recomendations from '../components/Reco/Recomendations';
-import Footer from '../components/Footer/Footer'
+import Footer from '../components/Footer/Footer';
+import LoginModal from '../components/Login/LoginModal';
 import './App.css';
 
 
@@ -18,7 +19,8 @@ class App extends React.Component{
       userId : '',
       calChanged : false,
       city : '',
-      countryCode : ''
+      countryCode : '',
+      sessionStart : true
     }
   }
   
@@ -56,7 +58,8 @@ class App extends React.Component{
   render () {
     const {route, isSignedIn, userId, city, countryCode, calChanged } = this.state;
     return (
-      <div className="App" style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+      <div className="App" id="App" style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+        <LoginModal wait={3000}/>
         <Nav onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
         {route ==='/home'
           ?<div>
