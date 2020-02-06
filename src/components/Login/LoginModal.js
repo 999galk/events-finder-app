@@ -20,7 +20,7 @@ class LoginModal extends React.Component {
   constructor () {
     super();
     this.state = {
-      showModal: false
+      showModal: true
     };
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -42,6 +42,7 @@ class LoginModal extends React.Component {
    }
   
   render () {
+  	console.log('in modal render');
     return (
       <div>
         <Modal 
@@ -52,7 +53,7 @@ class LoginModal extends React.Component {
           <div className='pa4' style={{width:'400px', display:'flex', justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
 	          <h2>Sign In with google to unlock this option</h2>
 	          <img alt='googlesignin' src={googleSignin} style={{width:'200px', marginLeft:'auto', marginRight:'auto'}} onClick={() => {onGoogleClick('login')}} className="grow pointer mt3"/>
-	          <div className='pointer b grow mt3' onClick={this.handleCloseModal}>Sign in later</div>
+	          <div className='pointer b grow mt3' onClick={this.handleCloseModal}>Skip</div>
           </div>
         </Modal>
       </div>

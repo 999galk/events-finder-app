@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/sass/styles.scss';
 import '../Calendar.css';
 import EventDetails from '../Events/EventDetails';
+
  
 const localizer = momentLocalizer(moment);
  
@@ -15,9 +16,10 @@ class EventsCalendar extends React.Component{
 			eventTitle : 'Powered By',
 			eventImg : 'https://uk.tmconst.com/ccp-salesforce-images/DK/ticketmaster_guider_720x405.jpg',
 			eventLink : 'https://www.ticketmaster.com/',
+			eventSalesStart : '',
 			eventTicketsLimit : '',
 			eventId : '',
-			eventClicked : false
+			eventClicked : false,
 		}}
 
 	SaveSearch = () => {
@@ -47,20 +49,9 @@ class EventsCalendar extends React.Component{
 	        btnDiv.appendChild(msg);
 	      })
 	}
-
-	// fetch_retry = (url , n) => {
-	// 	console.log('got to fetch retry', url);
-	// 	fetch(url).catch(function(error) {
-	// 		console.log('attempt ', n);
-	// 	    if (n === 1) throw error;
-	// 	    return this.fetch_retry(url , n - 1);
-	// 	});
-	// }
-
 	getEvents= () => {
 		console.log('got to get events');
 		const fetchUrl = 'https://fierce-bastion-22088.herokuapp.com/calendar/' + this.props.countryCode + '/' + this.props.city;
-		//this.fetch_retry(fetchUrl, 3)
 		fetch(fetchUrl)
 		.then(res => res.json())
 		.then(data => {
@@ -68,6 +59,7 @@ class EventsCalendar extends React.Component{
 			if(data[Object.keys(data)[0]].events){
 				const eventsArr = data[Object.keys(data)[0]].events;
 				tempEventsArr = eventsArr.map(event => {
+					console.log('event from tiick:', event);
 					const startDate = new Date(event.dates.start.dateTime);
 					const endDate = new Date(startDate + 1);
 					const obj = {
@@ -76,13 +68,15 @@ class EventsCalendar extends React.Component{
 						start : startDate,
 						end : endDate,
 						img : event.images[5].url,
-						ticketsUrl : event.url
+						ticketsUrl : event.url,
+						sales : event.sales.public.startDateTime.split('T')[0],
+						limit : event.ticketLimit
 					}
 					return obj;
 				})
 			}
 			
-			this.setState({events : tempEventsArr}, this.addClickFunctions);
+			this.setState({events : tempEventsArr, eventsLoaded : true}, this.addClickFunctions);
 		});
 	}
 
@@ -96,6 +90,8 @@ class EventsCalendar extends React.Component{
 								eventLink:selectedEvent[0].ticketsUrl, 
 								eventTitle:selectedEvent[0].title,
 								eventId : selectedEvent[0].id,
+								eventSalesStart : selectedEvent[0].sales,
+								eventTicketsLimit : selectedEvent[0].limit,
 								eventClicked : true
 							});
 				});
@@ -119,19 +115,21 @@ class EventsCalendar extends React.Component{
 		if(this.props.city){
 			this.getEvents();
 		}
-		const toolBar = document.getElementsByClassName('rbc-toolbar')[0];
-		toolBar.addEventListener("click", () => {this.getEvents();});
-		const showMore = document.getElementsByClassName('rbc-show-more');
-		if(showMore){
-			for(let i=0;i<showMore.length;i++){
-				showMore[i].addEventListener("click", () => {this.getEvents();})
+		if(this.state.eventsLoaded){
+			const toolBar = document.getElementsByClassName('rbc-toolbar')[0];
+			toolBar.addEventListener("click", () => {this.getEvents();});
+			const showMore = document.getElementsByClassName('rbc-show-more');
+			if(showMore){
+				for(let i=0;i<showMore.length;i++){
+					showMore[i].addEventListener("click", () => {this.getEvents();})
+				}
 			}
 		}
 		window.onpopstate = this.props.onBackButtonEvent;
   	}
 
 	render(){
-		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit} = this.state;
+		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit, eventSalesStart} = this.state;
 		const {isSignedIn} = this.props;
 		return(
 			<div id='calendar' className='pa2 ma2 shadow-5'>
@@ -146,7 +144,7 @@ class EventsCalendar extends React.Component{
 			      style={{height: 500}}
 			    />
 			    <div style={{display:'flex', justifyContent:'center'}}>
-		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} onRouteChange={this.props.onRouteChange} limit={eventTicketsLimit}/>
+		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} limit={eventTicketsLimit} sale={eventSalesStart}/>
 		  		</div>
 			</div> 
 		);
