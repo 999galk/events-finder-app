@@ -46,7 +46,7 @@ class EventDetails extends React.Component{
 					<a href={eventLink} className='ma2 mt3 f3 white db' target="_blank" rel="noopener noreferrer">Order Tickets Now!</a>
 					{
 						eventClicked
-						? <div>
+						? <div id="buttonDiv">
 						<img className='pointer mt3' onClick={this.handleGoogleClick} title="Add this event to my Google Calendar" alt="googleCal" src="https://d14f1v6bh52agh.cloudfront.net/oS578Mo8psy93c5uRIvpia1L5EU=/fit-in/1400xorig/uploads/zn6V8AMIh9RbHP5oxNmcUsbHRbR2W4NUSuuC28wr.jpeg" style={{width:'150px'}}/>
 						{
 							openModal
