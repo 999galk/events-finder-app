@@ -34,3 +34,19 @@
 #calendar{
   background-color: #F1F2F7;
 }
+
+@media screen and (min-width: 200px) {
+  .rbc-btn-group{
+    font-size: 80%;
+  }
+}
+@media screen and (min-width: 400px) {
+  .rbc-btn-group{
+    font-size: 85%;
+  }
+}
+@media screen and (min-width: 800px) {
+  .rbc-btn-group{
+    font-size: 100%;
+  }
+}

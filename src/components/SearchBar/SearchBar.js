@@ -98,7 +98,7 @@ class SearchBar extends React.Component {
 		return (
 			<div className='pa5' style={{paddingRight:'6rem', paddingLeft:'5rem'}}>
 				<h1> Where are you traveling to?</h1>
-				<div id='bar' className='br3 pa5 ma3 ml5 mr5 shadow-5' style={{display:'flex', justifyContent:'center', flexWrap: 'wrap'}}>
+				<div id='bar' className='br3 pa5 ma3 ml4 mr5' style={{display:'flex', justifyContent:'center', flexWrap: 'wrap'}}>
 					<div>
 					<CountryDropdown
 					className='pa3 ba br3 b--blue bg-lightest-blue ma2 mw5'
