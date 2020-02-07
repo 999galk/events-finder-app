@@ -28,9 +28,13 @@ class EventDetails extends React.Component{
 					<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'wrap'}}>
 					{
 						eventClicked
-						?<div className='white ma3' style={{maxWidth:'60%'}}>
+						?<div id='infoText' className='white ma3'>
 							<h3 className='mw5 center'>{eventTitle}</h3>
-							<p> Sales start at {sale}</p>
+							{
+								sale.startDateTime
+								? <p>Sale start at {sale.startDateTime.split('T')[0]}</p>
+								: <p> Sale start TBD</p>
+							}
 							{
 								limit
 								? <p>{limit.info}</p>

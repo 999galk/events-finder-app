@@ -20,6 +20,7 @@ class EventsCalendar extends React.Component{
 			eventTicketsLimit : '',
 			eventId : '',
 			eventClicked : false,
+			clickActionsAdded : ''
 		}}
 
 	SaveSearch = () => {
@@ -69,7 +70,7 @@ class EventsCalendar extends React.Component{
 						end : endDate,
 						img : event.images[5].url,
 						ticketsUrl : event.url,
-						sales : event.sales.public.startDateTime.split('T')[0],
+						sales : event.sales.public,
 						limit : event.ticketLimit
 					}
 					return obj;
@@ -81,11 +82,13 @@ class EventsCalendar extends React.Component{
 	}
 
 	addClickFunctions = () => {
+		console.log('started add clicks');
 		const eventsClasses = document.querySelectorAll(".rbc-event");
 		if(eventsClasses){
 			eventsClasses.forEach(div => {
 				const selectedEvent = this.getEventObj(div);
 				div.addEventListener("click", () => {
+					console.log('recognized click');
 					this.setState({eventImg : selectedEvent[0].img, 
 								eventLink:selectedEvent[0].ticketsUrl, 
 								eventTitle:selectedEvent[0].title,
@@ -96,6 +99,7 @@ class EventsCalendar extends React.Component{
 							});
 				});
 		})
+			this.setState({clickActionsAdded : eventsClasses.length})
 		}
 	}
 
@@ -115,24 +119,22 @@ class EventsCalendar extends React.Component{
 		if(this.props.city){
 			this.getEvents();
 		}
-		if(this.state.eventsLoaded){
-			const toolBar = document.getElementsByClassName('rbc-toolbar')[0];
-			toolBar.addEventListener("click", () => {this.getEvents();});
-			const showMore = document.getElementsByClassName('rbc-show-more');
-			if(showMore){
-				for(let i=0;i<showMore.length;i++){
-					showMore[i].addEventListener("click", () => {this.getEvents();})
-				}
+		const toolBar = document.getElementsByClassName('rbc-toolbar')[0];
+		toolBar.addEventListener("click", () => {this.getEvents();});
+		const showMore = document.getElementsByClassName('rbc-show-more');
+		if(showMore){
+			for(let i=0;i<showMore.length;i++){
+				showMore[i].addEventListener("click", () => {this.getEvents();})
 			}
 		}
 		window.onpopstate = this.props.onBackButtonEvent;
   	}
 
 	render(){
-		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit, eventSalesStart} = this.state;
+		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit, eventSalesStart, clickActionsAdded} = this.state;
 		const {isSignedIn} = this.props;
 		return(
-			<div id='calendar' className='pa2 ma2 shadow-5'>
+			<div id='calendar' className='pa2 ma2 shadow-5' value={clickActionsAdded}>
 				<h1>
 					{`Upcoming Events For ${this.props.city}, ${this.props.countryCode}:`}
 				</h1>
@@ -141,7 +143,7 @@ class EventsCalendar extends React.Component{
 			      events={events}
 			      startAccessor="start"
 			      endAccessor="end"
-			      style={{height: 500}}
+			      style={{height: 550}}
 			    />
 			    <div style={{display:'flex', justifyContent:'center'}}>
 		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} limit={eventTicketsLimit} sale={eventSalesStart}/>

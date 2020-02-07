@@ -35,18 +35,27 @@
   background-color: #F1F2F7;
 }
 
-@media screen and (min-width: 200px) {
+@media screen and (min-width: 320px) {
   .rbc-btn-group{
     font-size: 80%;
+  }
+  #infoText{
+    max-width: 90%;
   }
 }
 @media screen and (min-width: 400px) {
   .rbc-btn-group{
     font-size: 85%;
   }
+  #infoText{
+    max-width: 85%;
+  }
 }
 @media screen and (min-width: 800px) {
   .rbc-btn-group{
     font-size: 100%;
+  }
+  #infoText{
+    max-width: 60%;
   }
 }
