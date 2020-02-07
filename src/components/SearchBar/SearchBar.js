@@ -98,17 +98,17 @@ class SearchBar extends React.Component {
 		return (
 			<div className='pa5' style={{paddingRight:'6rem', paddingLeft:'5rem'}}>
 				<h1> Where are you traveling to?</h1>
-				<div id='bar' className='br3 pa5 ma3 ml4 mr5' style={{display:'flex', justifyContent:'center', flexWrap: 'wrap'}}>
+				<div id='bar' className='br3 pa5 ma3' style={{display:'flex', justifyContent:'center', flexWrap: 'wrap', maxWidth:'60%', marginLeft:'auto', marginRight:'auto'}}>
 					<div>
 					<CountryDropdown
-					className='pa3 ba br3 b--blue bg-lightest-blue ma2 mw5'
+					className='pa3 ba br3 b--blue bg-lightest-blue ma2 mw5 allFont'
 			          value={country}
 			          onChange={(val) => this.onCountryChange(val)}
 			          whitelist={supportedCountryCode}
 			          />
 			         </div>
 					<div id='cities'>
-						<select id='citySelector' className='pa3 ba br3 b--blue bg-lightest-blue ma2 mw5' onChange={this.onCityChange}>
+						<select id='citySelector' className='pa3 ba br3 b--blue bg-lightest-blue ma2 mw5 allFont' onChange={this.onCityChange}>
 							<option value>Select City</option>
 						</select>
 					</div>
