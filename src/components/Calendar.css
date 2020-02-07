@@ -24,15 +24,14 @@
 .eventDetails{
   background-color: black;
 }
+
+#calendar{
+  background-color: #F1F2F7;
+}
 .rbc-calendar{
   padding:15px;
   margin-left:7%;
   margin-right:7%;
-  border : solid #3174ad;
-  border-radius: 1.5rem;
-}
-#calendar{
-  background-color: #F1F2F7;
 }
 
 @media screen and (min-width: 320px) {
@@ -42,6 +41,9 @@
   #infoText{
     max-width: 90%;
   }
+  .rbc-calendar{
+  border : none;
+}
 }
 @media screen and (min-width: 400px) {
   .rbc-btn-group{
@@ -50,6 +52,10 @@
   #infoText{
     max-width: 85%;
   }
+  .rbc-calendar{
+  border : solid #3174ad;
+  border-radius: 1.5rem;
+}
 }
 @media screen and (min-width: 800px) {
   .rbc-btn-group{
@@ -58,4 +64,8 @@
   #infoText{
     max-width: 60%;
   }
+  .rbc-calendar{
+  border : solid #3174ad;
+  border-radius: 1.5rem;
+}
 }
