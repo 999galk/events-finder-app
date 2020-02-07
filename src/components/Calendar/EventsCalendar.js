@@ -77,7 +77,7 @@ class EventsCalendar extends React.Component{
 				})
 			}
 			
-			this.setState({events : tempEventsArr, eventsLoaded : true}, this.addClickFunctions);
+			this.setState({events : tempEventsArr}, this.addClickFunctions);
 		});
 	}
 
@@ -143,7 +143,7 @@ class EventsCalendar extends React.Component{
 			      events={events}
 			      startAccessor="start"
 			      endAccessor="end"
-			      style={{height: 550}}
+			      style={{height: 400}}
 			    />
 			    <div style={{display:'flex', justifyContent:'center'}}>
 		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} limit={eventTicketsLimit} sale={eventSalesStart}/>
