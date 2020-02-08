@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import googleSignin from './googleSignin.png';
 import {onGoogleClick} from './LoginFunctions';
 
@@ -38,7 +38,7 @@ class Register extends React.Component {
       .then(user => {
         console.log(user.id);
           if (user.id) {
-            const profileUrl = 'https://dreamy-bell-bb05ae.netlify.com/?profile=' + user.id;
+            const profileUrl = 'https://tripeventsfinder.netlify.com/?profile=' + user.id;
             window.location.replace(profileUrl);
           } else {
             const passDiv = document.getElementById('password');
