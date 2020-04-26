@@ -27,6 +27,7 @@
 
 #calendar{
   background-color: #F1F2F7;
+  opacity: 0.9;
 }
 .rbc-calendar{
   padding:15px;
