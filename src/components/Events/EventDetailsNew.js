@@ -25,14 +25,16 @@ class EventDetails extends React.Component{
 		const {openModal} = this.state;
 		return(
 			<div id='details' className='dib br3 pa2 ma4 bw2 mw5 mw7-ns' style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
-				<div id={eventId} className='ph5-ns ma2 details-items'>
+				<div id={eventId} className='pa3 ph5-ns ma2 br4'>
 					<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'wrap'}}>
+
 					<div className='pa3'>
 						<img src={eventImg} alt='eventImg' style={{width:'250px'}}/>
 					</div>
 					{
 						eventClicked
-						?<div id='infoText' className='black ma3'>
+						?
+						<div id='infoText' className='ma3'>
 							<h3 className='mw5 center'>{eventTitle}</h3>
 							{
 								sale.startDateTime
@@ -47,8 +49,7 @@ class EventDetails extends React.Component{
 						</div>
 						: <div></div>
 					}
-					</div>
-					<a href={eventLink} className='ma2 mt3 f3 black db' target="_blank" rel="noopener noreferrer">Order Tickets Now!</a>
+					<a href={eventLink} className='ma2 mt3 f3 db' target="_blank" rel="noopener noreferrer">Order Tickets Now!</a>
 					{
 						eventClicked
 						? <div id="buttonDiv">
@@ -61,6 +62,7 @@ class EventDetails extends React.Component{
 						</div>
 						:<div></div>
 					}
+					</div>
 				</div>
 			</div>
 		)

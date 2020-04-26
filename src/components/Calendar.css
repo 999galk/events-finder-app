@@ -17,16 +17,9 @@
 .back {
   z-index: -1;
 }
-#details {
- color:white;
- background-color: black;
-}
-.eventDetails{
-  background-color: black;
-}
 
 #calendar{
-  background-color: #F1F2F7;
+  background-color: white;
   opacity: 0.9;
 }
 .rbc-calendar{
