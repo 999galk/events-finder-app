@@ -1,40 +1,48 @@
 import React from 'react';
-import LoginModal from '../Login/LoginModal';
 import './EventDetails.css';
+import LoginModal from '../Login/LoginModal';
+import EventsModal from './EventsModal';
+ 
 
 class EventDetails extends React.Component{
 	constructor(props){
-		super(props)
+		console.log('constructor');
+		super(props);
 		this.state = {
 			openModal : false
-		}}
+		}
+	}
 
 	handleGoogleClick = () => {
-		console.log('recognized click');
 		if(this.props.isSignedIn){
-			console.log('firxt if');
 			this.props.SaveSearch();
 		}else {
-			console.log('else');
 			this.setState({openModal:true});
 		}
 	}	
 
 	render(){
+		console.log('render');
 		const {eventImg,eventId, eventLink, eventTitle, eventClicked,limit, sale} = this.props;
 		const {openModal} = this.state;
+		console.log('state:', this.state);
 		return(
 			<div id='details' className='dib br3 pa2 ma4 bw2 mw5 mw7-ns' style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
-				<div id={eventId} className='pa3 ph5-ns ma2 br4'>
+				<div id={eventId} className='ph5-ns ma2 details-items'>
 					<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'wrap'}}>
-
 					<div className='pa3'>
 						<img src={eventImg} alt='eventImg' style={{width:'250px'}}/>
 					</div>
 					{
 						eventClicked
-						?
-						<div id='infoText' className='ma3'>
+						?<EventsModal>
+				        <div id={eventId} className='ph5-ns ma2 details-items'>
+						<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'wrap'}}>
+						<div className='pa3'>
+							<img src={eventImg} alt='eventImg' style={{width:'250px'}}/>
+						</div>
+						<div id='infoText' className='black ma3'>
+						<button onClick={this.closeModal}>close</button>
 							<h3 className='mw5 center'>{eventTitle}</h3>
 							{
 								sale.startDateTime
@@ -47,9 +55,12 @@ class EventDetails extends React.Component{
 								: <p></p>
 							}
 						</div>
+						</div></div>
+						</EventsModal>
 						: <div></div>
 					}
-					<a href={eventLink} className='ma2 mt3 f3 db' target="_blank" rel="noopener noreferrer">Order Tickets Now!</a>
+					</div>
+					<a href={eventLink} className='ma2 mt3 f3 black db' target="_blank" rel="noopener noreferrer">Order Tickets Now!</a>
 					{
 						eventClicked
 						? <div id="buttonDiv">
@@ -62,7 +73,6 @@ class EventDetails extends React.Component{
 						</div>
 						:<div></div>
 					}
-					</div>
 				</div>
 			</div>
 		)

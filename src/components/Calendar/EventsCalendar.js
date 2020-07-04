@@ -7,7 +7,7 @@ import EventDetails from '../Events/EventDetails';
 
  
 const localizer = momentLocalizer(moment);
- 
+
 class EventsCalendar extends React.Component{
 	constructor(props){
 		super(props)
@@ -50,8 +50,8 @@ class EventsCalendar extends React.Component{
 	        btnDiv.appendChild(msg);
 	      })
 	}
+
 	getEvents= () => {
-		console.log('got to get events');
 		const fetchUrl = 'https://fierce-bastion-22088.herokuapp.com/calendar/' + this.props.countryCode + '/' + this.props.city;
 		fetch(fetchUrl)
 		.then(res => res.json())
@@ -60,7 +60,6 @@ class EventsCalendar extends React.Component{
 			if(data[Object.keys(data)[0]].events){
 				const eventsArr = data[Object.keys(data)[0]].events;
 				tempEventsArr = eventsArr.map(event => {
-					console.log('event from tiick:', event);
 					const startDate = new Date(event.dates.start.dateTime);
 					const endDate = new Date(startDate + 1);
 					const obj = {
@@ -82,13 +81,11 @@ class EventsCalendar extends React.Component{
 	}
 
 	addClickFunctions = () => {
-		console.log('started add clicks');
 		const eventsClasses = document.querySelectorAll(".rbc-event");
 		if(eventsClasses){
 			eventsClasses.forEach(div => {
 				const selectedEvent = this.getEventObj(div);
 				div.addEventListener("click", () => {
-					console.log('recognized click');
 					this.setState({eventImg : selectedEvent[0].img, 
 								eventLink:selectedEvent[0].ticketsUrl, 
 								eventTitle:selectedEvent[0].title,
@@ -96,7 +93,7 @@ class EventsCalendar extends React.Component{
 								eventSalesStart : selectedEvent[0].sales,
 								eventTicketsLimit : selectedEvent[0].limit,
 								eventClicked : true
-							});
+							}, this.executeScroll);
 				});
 		})
 			this.setState({clickActionsAdded : eventsClasses.length})
@@ -130,6 +127,8 @@ class EventsCalendar extends React.Component{
 		window.onpopstate = this.props.onBackButtonEvent;
   	}
 
+  	executeScroll = () => document.getElementById('details').scrollIntoView({behavior: 'smooth'});
+
 	render(){
 		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit, eventSalesStart, clickActionsAdded} = this.state;
 		const {isSignedIn} = this.props;
@@ -145,7 +144,7 @@ class EventsCalendar extends React.Component{
 			      endAccessor="end"
 			      style={{height: 400}}
 			    />
-			    <div style={{display:'flex', justifyContent:'center'}}>
+			    <div style={{display:'flex', justifyContent:'center'}} id='details_section'>
 		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} limit={eventTicketsLimit} sale={eventSalesStart}/>
 		  		</div>
 			</div> 

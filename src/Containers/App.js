@@ -6,6 +6,7 @@ import Nav from '../components/NavBar/Nav';
 import EventsCalendar from '../components/Calendar/EventsCalendar';
 import Recomendations from '../components/Reco/Recomendations';
 import Footer from '../components/Footer/Footer';
+import LoaderNew from '../components/Loader/Loader';
 import './App.css';
 
 
@@ -19,7 +20,8 @@ class App extends React.Component{
       calChanged : false,
       city : '',
       countryCode : '',
-      sessionStart : true
+      sessionStart : true,
+      loaderStatus : true
     }
   }
   
@@ -52,14 +54,21 @@ class App extends React.Component{
     }
     window.onpopstate = this.onBackButtonEvent;
     fetch('https://fierce-bastion-22088.herokuapp.com/calendar/US');
+    this.setState({loaderStatus : false});
+  }
+
+  componentWillUpdate(){
+    // this.setState({loaderStatus : ''});
   }
 
   render () {
-    const {route, isSignedIn, userId, city, countryCode, calChanged } = this.state;
+    const {route, isSignedIn, userId, city, countryCode, calChanged, loaderStatus } = this.state;
     return (
       <div className="App" id="App" style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
         <Nav onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
-        {route ==='/home'
+        {loaderStatus === true
+          ?<div><LoaderNew /></div>
+          : (route ==='/home'
           ?<div>
           <Header onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} userId={userId} onSearchChange={this.onSearchChange} calChanged={calChanged}/>
           {
@@ -75,6 +84,7 @@ class App extends React.Component{
                 : <div>No route found</div>
                 )
             )
+          )
         }
         <Footer />
       </div>
