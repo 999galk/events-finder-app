@@ -133,8 +133,8 @@ class EventsCalendar extends React.Component{
 		const {events, eventImg, eventLink, eventTitle, eventClicked, eventTicketsLimit, eventSalesStart, clickActionsAdded} = this.state;
 		const {isSignedIn} = this.props;
 		return(
-			<div id='calendar' className='pa2 ma2 mb5 shadow-5' value={clickActionsAdded}>
-				<h1>
+			<div id='calendar' className='pa2 ma2 mb5 shadow-5 mt4' value={clickActionsAdded}>
+				<h1 style={{marginTop : '2.5rem', marginBottom : '2rem'}}>
 					{`Upcoming Events For ${this.props.city}, ${this.props.countryCode}:`}
 				</h1>
 			    <Calendar
@@ -142,7 +142,7 @@ class EventsCalendar extends React.Component{
 			      events={events}
 			      startAccessor="start"
 			      endAccessor="end"
-			      style={{height: 400}}
+			      style={{height: 500}}
 			    />
 			    <div style={{display:'flex', justifyContent:'center'}} id='details_section'>
 		  		<EventDetails eventImg={eventImg} eventLink={eventLink} eventTitle={eventTitle} eventClicked={eventClicked} SaveSearch={this.SaveSearch} isSignedIn={isSignedIn} limit={eventTicketsLimit} sale={eventSalesStart}/>

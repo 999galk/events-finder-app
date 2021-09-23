@@ -37,6 +37,7 @@
   }
   .rbc-calendar{
   border : none;
+  margin : 0;
 }
 }
 @media screen and (min-width: 400px) {
@@ -46,10 +47,10 @@
   #infoText{
     max-width: 85%;
   }
-  .rbc-calendar{
+/*  .rbc-calendar{
   border : solid #3174ad;
   border-radius: 1.5rem;
-}
+}*/
 }
 @media screen and (min-width: 800px) {
   .rbc-btn-group{
@@ -58,8 +59,8 @@
   #infoText{
     max-width: 60%;
   }
-  .rbc-calendar{
+/*  .rbc-calendar{
   border : solid #3174ad;
   border-radius: 1.5rem;
-}
+}*/
 }
